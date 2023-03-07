@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 ##Library directories
 SET(LIBRARY_INCLUDE_DIRECTORIES
+	${PROJECT_SOURCE_DIR}/Grapher3D/include/
 )
 SET(LIBRARY_LINK_OBJECTS
+	Grapher3D
 )
 
 ##Setting source and include directories
