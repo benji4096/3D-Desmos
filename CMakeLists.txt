@@ -17,3 +17,8 @@ add_subdirectory(lib/freetype) # Font glyph library
 add_subdirectory("Renderer")
 add_subdirectory("Grapher3D")
 add_subdirectory("main")
+
+
+
+##Set working directory
+set_property(TARGET main PROPERTY VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

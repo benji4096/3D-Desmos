@@ -5,6 +5,7 @@
 
 std::optional<Grapher3D> graphApplication = std::optional<Grapher3D>(); // Use of std::optional for delayed instantiation
 
+
 int main(int argc, char* argv[])
 {
 	try

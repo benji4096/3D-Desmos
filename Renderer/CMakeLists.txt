@@ -24,10 +24,14 @@ SET(INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include)
 ##Source Files
 SET(SOURCE_FILES
 	${SOURCE_DIRECTORY}/Renderer.cpp
+	${SOURCE_DIRECTORY}/Shader.cpp
+	${SOURCE_DIRECTORY}/glUtils.cpp
 )
 ##Header Files
 SET(INCLUDE_FILES
 	${INCLUDE_DIRECTORY}/Renderer.hpp
+	${INCLUDE_DIRECTORY}/Shader.hpp
+	${INCLUDE_DIRECTORY}/glUtils.h
 )
 
 ##Add library

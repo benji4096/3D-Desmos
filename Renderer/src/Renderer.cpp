@@ -29,12 +29,17 @@ GLFWContext::~GLFWContext()
 
 Window::Window(int width, int height, const char* name)
 {
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+
 	m_window = glfwCreateWindow(width, height, name, NULL, NULL); // create new GLFW window
 	if (!m_window) { // failed to create window
 		throw std::runtime_error("Could not create GLFW window");
 	}
 
 	makeContextCurrent();
+
+	glfwSwapInterval(1);
 }
 
 Window::~Window()
