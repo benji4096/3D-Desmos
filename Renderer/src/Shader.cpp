@@ -309,7 +309,7 @@ GLuint Shader::getUniformLocation(const char* loc)
 	return glGetUniformLocation(mProgramID, loc);
 }
 
-void Shader::uniform(GLint location, const GLfloat& value)
+void Shader::uniform(GLint location, const float& value)
 {
 	glUseProgram(mProgramID);
 	glUniform1f(location, value);
@@ -329,7 +329,7 @@ void Shader::uniform(GLint location, const glm::vec4& value)
 	glUseProgram(mProgramID);
 	glUniform4f(location, value.x, value.y, value.z, value.w);
 }
-void Shader::uniform(GLint location, const GLint& value)
+void Shader::uniform(GLint location, const int32_t& value)
 {
 	glUseProgram(mProgramID);
 	glUniform1i(location, value);
@@ -349,7 +349,7 @@ void Shader::uniform(GLint location, const glm::ivec4& value)
 	glUseProgram(mProgramID);
 	glUniform4i(location, value.x, value.y, value.z, value.w);
 }
-void Shader::uniform(GLint location, const GLuint& value)
+void Shader::uniform(GLint location, const uint32_t& value)
 {
 	glUseProgram(mProgramID);
 	glUniform1ui(location, value);

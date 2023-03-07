@@ -21,7 +21,7 @@ void Grapher3D::run()
 
 	glBindVertexArray(vao);
 
-	GLuint offsetUniformLocation = simpleShader.getUniformLocation("offset");
+	GLint offsetUniformLocation = simpleShader.getUniformLocation("offset");
 
 	float t = 0.0f;
 
@@ -30,7 +30,7 @@ void Grapher3D::run()
 
 
 		t += 0.01f;
-		simpleShader.uniform(offsetUniformLocation, 0.3f * sin(t));
+		simpleShader.uniform(offsetUniformLocation, 0.3f * float(sin(t)));
 		simpleShader.use();
 		glCheckError(__LINE__);
 		glPointSize(30.0f);

@@ -110,15 +110,15 @@ public:
 
 	GLuint getUniformLocation(const char* loc);
 
-	void uniform(GLint location, const GLfloat& value);
+	void uniform(GLint location, const float& value);
 	void uniform(GLint location, const glm::vec2& value);
 	void uniform(GLint location, const glm::vec3& value);
 	void uniform(GLint location, const glm::vec4& value);
-	void uniform(GLint location, const GLint& value);
+	void uniform(GLint location, const int32_t& value);
 	void uniform(GLint location, const glm::ivec2& value);
 	void uniform(GLint location, const glm::ivec3& value);
 	void uniform(GLint location, const glm::ivec4& value);
-	void uniform(GLint location, const GLuint& value);
+	void uniform(GLint location, const uint32_t& value);
 	void uniform(GLint location, const glm::uvec2& value);
 	void uniform(GLint location, const glm::uvec3& value);
 	void uniform(GLint location, const glm::uvec4& value);
