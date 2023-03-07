@@ -7,9 +7,9 @@ project("3D-Desmos")
 ##Include libraries
 #add_subdirectory(lib/glew-cmake)
 #add_subdirectory(lib/SDL)
-#add_subdirectory(lib/stbImplimentation)
-#add_subdirectory(lib/glm)
-#add_subdirectory(lib/freetype)
+#add_subdirectory(lib/stbImplimentation)//image library 
+#add_subdirectory(lib/glm)//
+#add_subdirectory(lib/freetype)//font cliff library
 
 
 
