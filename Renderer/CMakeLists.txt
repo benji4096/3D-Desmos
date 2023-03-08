@@ -26,12 +26,14 @@ SET(SOURCE_FILES
 	${SOURCE_DIRECTORY}/Renderer.cpp
 	${SOURCE_DIRECTORY}/Shader.cpp
 	${SOURCE_DIRECTORY}/glUtils.cpp
+	${SOURCE_DIRECTORY}/gui.cpp
 )
 ##Header Files
 SET(INCLUDE_FILES
 	${INCLUDE_DIRECTORY}/Renderer.hpp
 	${INCLUDE_DIRECTORY}/Shader.hpp
 	${INCLUDE_DIRECTORY}/glUtils.h
+	${INCLUDE_DIRECTORY}/gui.hpp
 )
 
 ##Add library
