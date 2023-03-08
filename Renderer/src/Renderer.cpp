@@ -2,14 +2,26 @@
 
 #include <stdexcept>
 #include <string>
+#include <iostream>
+
+#include "glUtils.h"
 
 GLEWContext::GLEWContext()
 {
+	//glewExperimental = GL_TRUE;
 	GLenum err = glewInit(); // initalize GLEW
 	if (err != GLEW_OK) // GLEW failed to initalize
-	{
 		throw std::runtime_error(std::string("Could not initalize GLEW (") + (const char*)glewGetErrorString(err) + ')');
-	}
+	if (!glewIsSupported("GL_ARB_direct_state_access"))
+		throw std::runtime_error("Modern OpenGL unsupported (extension=ARB_direct_state_access)");
+
+	/*GLint extensionCount;
+	glGetIntegerv(GL_NUM_EXTENSIONS, &extensionCount);
+	std::cout << "Number of supported extensions: " << extensionCount << std::endl;
+	for (int i = 0; i < extensionCount; i++)
+	{
+		std::cout << glGetStringi(GL_EXTENSIONS, i) << std::endl;
+	}*/
 }
 
 GLEWContext::~GLEWContext()
