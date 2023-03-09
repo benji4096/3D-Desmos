@@ -12,7 +12,9 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 		GL_UNSIGNED_BYTE), // index type
 		testText()
 {
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // background color for OpenGL
+  windowResize();
+
+  glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // background color for OpenGL
 	glEnable(GL_DEPTH_TEST); // enable depth testing
 
 	cubeShader.addSources({ "res/shaders/cube.vert", "res/shaders/cube.frag" }); // set the source for the cube shader
@@ -25,10 +27,16 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	testText.setText(" Hello World!");
 }
 
+void Grapher3D::windowResize()
+{
+  m_windowDims = m_window.getWindowDims();
+  glViewport(0, 0, m_windowDims.x, m_windowDims.y);
+}
+
 void Grapher3D::run()
 {
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)); // scale up the cube
-	glm::mat4 projection = glm::perspective(45.0f, 1.0f, 0.1f, 100.0f); // perspective transformation
+	glm::mat4 projection = glm::perspective(45.0f, float(m_windowDims.x) / float(m_windowDims.y), 0.1f, 100.0f); // perspective transformation
 	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -5.0f)); // translate cube to center
 	glm::mat4 rotate = glm::mat4(1.0f); // rotation of cube
 	glm::mat4 transform; // combined transformation matrix
@@ -37,6 +45,8 @@ void Grapher3D::run()
 
 	while (!m_window.shouldClose())
 	{
+	  windowResize();
+	  
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear screen
 
 
@@ -44,13 +54,14 @@ void Grapher3D::run()
 		glEnable(GL_CULL_FACE); // enable culling
 
 		cubeShader.use(); // enable shader for cube
+		projection = glm::perspective(45.0f, float(m_windowDims.x) / float(m_windowDims.y), 0.1f, 100.0f); // perspective update aspect ratio
 		rotate = glm::rotate(rotate, 0.025f, glm::vec3(1.0f, 1.0f, 1.0f)); // rotation animation
 		transform = projection * translate * rotate * scale; // combine individual transformations
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
 		m_mesh.draw(); // draw cube
 
 
-		testText.draw(600.0f, 600.0f); // draw text
+		testText.draw(m_windowDims); // draw text
 
 
 		glCheckError(__LINE__); // check for OpenGL errors

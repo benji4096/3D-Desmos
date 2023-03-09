@@ -186,7 +186,7 @@ void TextSDF::setAntiAliasAmmount(float ammount)
 void TextSDF::setPos(glm::ivec2 pos)
 { m_pos = pos; }
 
-void TextSDF::draw(float width, float height)
+void TextSDF::draw(glm::ivec2 windowDims)
 {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -202,7 +202,7 @@ void TextSDF::draw(float width, float height)
     float currentY = 0.0f;
     uint32_t line = 0;
 
-    glm::mat4 projection = glm::ortho(0.0f, width, 0.0f, height);
+    glm::mat4 projection = glm::ortho(0.0f, float(windowDims.x), 0.0f, float(windowDims.y));
     glm::mat4 scale;
     glm::mat4 translation;
     glm::mat4 transformation;
@@ -227,7 +227,7 @@ void TextSDF::draw(float width, float height)
             //float tX = float(mFontSize) / float(c->size.y);
             glm::vec2 bearing = { tX * float(c->bearing.x), tY * float(c->bearing.y) };
 
-            translation = glm::translate(glm::mat4(1.0f), glm::vec3(glm::vec2(m_pos.x, -m_pos.y) + glm::vec2(currentX + tX * float(c->bearing.x), int(width) - (int(line) + 1) * int(m_fontSize) + tY * float(c->bearing.y - c->size.y)), 0.0f));
+            translation = glm::translate(glm::mat4(1.0f), glm::vec3(glm::vec2(m_pos.x, -m_pos.y) + glm::vec2(currentX + tX * float(c->bearing.x), windowDims.y - (int(line) + 1) * int(m_fontSize) + tY * float(c->bearing.y - c->size.y)), 0.0f));
             scale = glm::scale(glm::mat4(1.0f), glm::vec3(glm::vec2(tY * float(c->size.x), tX * float(c->size.y)), 1.0f));
 
             currentX += tX * float(c->advance >> 6);

@@ -2,6 +2,7 @@
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
+#include "glm/glm.hpp"
 
 class GLEWContext // container responsible for initalizing GLEW
 {
@@ -34,6 +35,8 @@ public:
 	void makeContextCurrent(); // makes GLFW context current to the current thread
 	bool shouldClose(); // if the window should be closed from inputs
 	void swapBuffers(); // swap window buffers
+
+  glm::ivec2 getWindowDims();
 };
 
 

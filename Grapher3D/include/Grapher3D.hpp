@@ -16,7 +16,9 @@ class Grapher3D
 	Window m_window; // GLFW window container
 	GLEWContext m_glewContext; // container responsible for initalizing GLEW
 
-
+  void windowResize();
+  glm::ivec2 m_windowDims;
+  
 
 	Shader cubeShader;
 

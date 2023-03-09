@@ -83,3 +83,10 @@ void Window::swapBuffers()
 {
 	glfwSwapBuffers(m_window);
 }
+
+glm::ivec2 Window::getWindowDims()
+{
+  glm::ivec2 rtn;
+  glfwGetWindowSize(m_window, &rtn.x, &rtn.y);
+  return rtn;
+}

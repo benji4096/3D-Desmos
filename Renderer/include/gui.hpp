@@ -79,7 +79,7 @@ public:
     void setSize(uint32_t size);
     void setAntiAliasAmmount(float ammount);
     void setPos(glm::ivec2 pos);
-    void draw(float width, float height);
+  void draw(glm::ivec2 windowDims);
 };
 
 
