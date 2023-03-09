@@ -11,7 +11,8 @@ uniform mat4 transform;
 
 void main()
 {
-	gl_Position = transform * vec4(pos, 1.0f);
+	vec4 outPos = transform * vec4(pos, 1.0f);
+	gl_Position = outPos;
 	uv = uv_point;
-	position = pos;
+	position = outPos.xyz;
 }

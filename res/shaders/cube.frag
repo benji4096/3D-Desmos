@@ -8,5 +8,5 @@ in vec3 position;
 
 void main()
 {
-	FragColor = vec4(uv, 0.0f, 1.0);
+	FragColor = vec4(cross(vec3(uv, 1.0f), position), 1.0);
 }

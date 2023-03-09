@@ -35,10 +35,10 @@ void Grapher3D::windowResize()
 
 void Grapher3D::run()
 {
-	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)); // scale up the cube
 	glm::mat4 projection = glm::perspective(45.0f, float(m_windowDims.x) / float(m_windowDims.y), 0.1f, 100.0f); // perspective transformation
-	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -5.0f)); // translate cube to center
+	glm::mat4 center = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f)); // translate cube to center
 	glm::mat4 rotate = glm::mat4(1.0f); // rotation of cube
+	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -2.0f)); // translate cube to center
 	glm::mat4 transform; // combined transformation matrix
 
 	GLuint tLoc = cubeShader.getUniformLocation("transform"); // uniform handle for transformation uniform
@@ -55,8 +55,8 @@ void Grapher3D::run()
 
 		cubeShader.use(); // enable shader for cube
 		projection = glm::perspective(45.0f, float(m_windowDims.x) / float(m_windowDims.y), 0.1f, 100.0f); // perspective update aspect ratio
-		rotate = glm::rotate(rotate, 0.025f, glm::vec3(1.0f, 1.0f, 1.0f)); // rotation animation
-		transform = projection * translate * rotate * scale; // combine individual transformations
+		rotate = glm::rotate(rotate, 0.025f, glm::vec3(1.0f, 1.0f, 0.0f)); // rotation animation
+		transform = projection * translate * rotate * center; // combine individual transformations
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
 		m_mesh.draw(); // draw cube
 

@@ -47,7 +47,7 @@ GLFWContext::~GLFWContext()
 Window::Window(int width, int height, const char* name)
 {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 
 	m_window = glfwCreateWindow(width, height, name, NULL, NULL); // create new GLFW window
 	if (!m_window) { // failed to create window
@@ -66,7 +66,7 @@ Window::~Window()
 	if (m_window)
 		glfwDestroyWindow(m_window); // destroy the GLFW window
 
-	std::cerr << "GLEW destroyed succesfully" << std::endl;
+	std::cerr << "Window destroyed succesfully" << std::endl;
 }
 
 void Window::makeContextCurrent()
