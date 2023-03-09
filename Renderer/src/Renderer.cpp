@@ -22,6 +22,7 @@ GLEWContext::GLEWContext()
 	{
 		std::cout << glGetStringi(GL_EXTENSIONS, i) << std::endl;
 	}*/
+	std::cerr << "GLEW initalized succesfully" << std::endl;
 }
 
 GLEWContext::~GLEWContext()
@@ -32,11 +33,15 @@ GLFWContext::GLFWContext()
 {
 	if (!glfwInit()) // initalize GLFW
 		throw std::runtime_error("Could not initalize GLFW");
+
+	std::cerr << "GLFW initalized succesfully" << std::endl;
 }
 
 GLFWContext::~GLFWContext()
 {
 	glfwTerminate(); // terminate GLFW
+
+	std::cerr << "GLFW terminated succesfully" << std::endl;
 }
 
 Window::Window(int width, int height, const char* name)
@@ -52,12 +57,16 @@ Window::Window(int width, int height, const char* name)
 	makeContextCurrent();
 
 	glfwSwapInterval(1);
+
+	std::cerr << "Window initalized succesfully" << std::endl;
 }
 
 Window::~Window()
 {
 	if (m_window)
 		glfwDestroyWindow(m_window); // destroy the GLFW window
+
+	std::cerr << "GLEW destroyed succesfully" << std::endl;
 }
 
 void Window::makeContextCurrent()

@@ -8,6 +8,7 @@
 #include "Shader.hpp"
 #include "Mesh.hpp"
 
+#include "gui.hpp"
 
 class Grapher3D
 {
@@ -17,15 +18,15 @@ class Grapher3D
 
 
 
-	Shader rectShader;
+	Shader cubeShader;
 
-	struct Vertex
+	struct Vertex // a 3d vertex with uv coordinates
 	{
 		glm::vec3 xy;
 		glm::vec2 uv;
 	};
 
-	std::vector<Vertex> vertices = {
+	std::vector<Vertex> vertices = { // vertices of a cube
 			   { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
 			   { { 1.0f, 0.0f, 0.0f }, { 0.333f, 0.0f } },
 			   { { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
@@ -37,7 +38,7 @@ class Grapher3D
 			   { { 1.0f, 1.0f, 1.0f }, { 0.667f, 1.0f } }
 	};
 
-	std::vector<uint8_t> indices = {
+	std::vector<uint8_t> indices = { // triangles that form cube
 			0, 3, 1,
 			0, 2, 3,
 			4, 5, 7,
@@ -58,11 +59,13 @@ class Grapher3D
 
 	IMeshUniversal<Vertex, uint8_t> m_mesh;
 
+
+	TextSDF testText;
+
 public:
 	Grapher3D(int windowWidth = 900, int windowHeight = 600);
 	Grapher3D(const Grapher3D& other) = delete;
 	const Grapher3D& operator=(const Grapher3D& other) = delete;
-	~Grapher3D();
 
 	void run(); // main program loop
 };

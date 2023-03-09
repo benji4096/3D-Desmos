@@ -23,8 +23,8 @@ private:
 	std::vector<IMeshUniversalAttribute> m_attributes;
 	GLenum m_indexType;
 
-	std::vector<VT> *p_verts;
-	std::vector<IT> *p_indices;
+	std::vector<VT> const *p_verts;
+	std::vector<IT> const *p_indices;
 
 	GLuint m_vao = 0;
 
@@ -39,7 +39,7 @@ private:
 	}
 
 public:
-	IMeshUniversal(std::vector<VT>* verts, std::vector<IT>* indices, const std::vector<IMeshUniversalAttribute> attributes, GLenum indexType)
+	IMeshUniversal(std::vector<VT> const *verts, std::vector<IT> const *indices, const std::vector<IMeshUniversalAttribute> attributes, GLenum indexType)
 		: p_verts(verts), p_indices(indices), m_attributes(attributes), m_indexType(indexType)
 	{
 		glCreateVertexArrays(1, &m_vao);
@@ -113,7 +113,7 @@ public:
 
 		//glBindVertexArray(0);
 	}
-	void draw()
+	const void draw()
 	{
 		if (hasVerts())
 		{
@@ -132,6 +132,3 @@ public:
 		}
 	}
 };
-
-void meshUpload();
-void meshDraw();
