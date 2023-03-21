@@ -2,6 +2,8 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 
+#include <string>
+
 Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	: m_glfwContext(), m_window(windowWidth, windowHeight, "3D Desmos"), m_glewContext(),
 	m_mesh(&vertices, &indices,
@@ -25,6 +27,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 
 
 	testText.setText(" Hello World!");
+	testText.setSize(50);
 }
 
 void Grapher3D::windowResize()
@@ -60,6 +63,8 @@ void Grapher3D::run()
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
 		m_mesh.draw(); // draw cube
 
+		testText.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		testText.setText(std::to_string(transform[0][0]) + "\n" + "Hello World!");
 
 		testText.draw(m_windowDims); // draw text
 

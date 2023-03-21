@@ -39,7 +39,7 @@ class Grapher3D
 			   { { 0.0f, 1.0f, 1.0f }, { 1.0f, 1.0f } },
 			   { { 1.0f, 1.0f, 1.0f }, { 0.667f, 1.0f } }
 	};
-
+	
 	std::vector<uint8_t> indices = { // triangles that form cube
 			0, 3, 1,
 			0, 2, 3,
