@@ -18,10 +18,12 @@ SET(INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include)
 ##Source Files
 SET(SOURCE_FILES
 	${SOURCE_DIRECTORY}/Grapher3D.cpp
+	${SOURCE_DIRECTORY}/MathExpression.cpp
 )
 ##Header Files
 SET(INCLUDE_FILES
 	${INCLUDE_DIRECTORY}/Grapher3D.hpp
+	${INCLUDE_DIRECTORY}/MathExpression.hpp
 )
 
 ##Add library

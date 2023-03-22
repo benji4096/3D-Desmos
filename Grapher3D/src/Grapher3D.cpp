@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "MathExpression.hpp"
+
 Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	: m_glfwContext(), m_window(windowWidth, windowHeight, "3D Desmos"), m_glewContext(),
 	m_mesh(&vertices, &indices,
@@ -28,6 +30,12 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 
 	testText.setText(" Hello World!");
 	testText.setSize(50);
+
+
+	std::unordered_map<std::string, float> vars = std::unordered_map<std::string, float>();
+	vars.insert({ "x", 5});
+	MathExpression expr = MathExpression();
+	testText.setText(std::to_string(expr.eval(vars)));
 }
 
 void Grapher3D::windowResize()
@@ -48,8 +56,8 @@ void Grapher3D::run()
 
 	while (!m_window.shouldClose())
 	{
-	  windowResize();
-	  
+		windowResize();
+		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear screen
 
 
@@ -63,8 +71,8 @@ void Grapher3D::run()
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
 		m_mesh.draw(); // draw cube
 
-		testText.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		testText.setText(std::to_string(transform[0][0]) + "\n" + "Hello World!");
+		//testText.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		//testText.setText(std::to_string(transform[0][0]) + "\n" + "Hello World!");
 
 		testText.draw(m_windowDims); // draw text
 
