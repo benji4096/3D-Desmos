@@ -1,18 +1,13 @@
 #pragma once
 
+#include <ostream>
 #include <variant>
 #include <vector>
 #include <string>
 
 #include <unordered_map>
 
-//struct Variable
-//{
-//	std::string name;
-//
-//};
-
-enum class Operator
+enum class OPERATOR
 {
 	ROOT_NODE,
 	ADD,
@@ -20,39 +15,99 @@ enum class Operator
 	MUL,
 	DIV,
 	EXP,
+	MOD,
+	ABS,
+	SQRT,
 	SIN,
 	COS,
-	MOD,
-	SQRT
+	TAN,
+	ASIN,
+	ACOS,
+	ATAN,
+	SEC,
+	CSC,
+	COT,
+
+
+	OPERATOR_COUNT // should always be at end 
 };
+
+inline std::ostream& operator<<(std::ostream& out, const OPERATOR& in)
+{
+	switch (in)
+	{
+	case OPERATOR::ROOT_NODE:		out << "ROOT";		break;
+	case OPERATOR::ADD:				out << "ADD";		break;
+	case OPERATOR::SUB:				out << "SUB";		break;
+	case OPERATOR::MUL:				out << "MUL";		break;
+	case OPERATOR::DIV:				out << "DIV";		break;
+	case OPERATOR::EXP:				out << "EXP";		break;
+	case OPERATOR::MOD:				out << "MOD";		break;
+	case OPERATOR::ABS:				out << "ABS";		break;
+	case OPERATOR::SQRT:			out << "SQRT";		break;
+	case OPERATOR::SIN:				out << "SIN";		break;
+	case OPERATOR::COS:				out << "COS";		break;
+	case OPERATOR::TAN:				out << "TAN";		break;
+	case OPERATOR::ASIN:			out << "ASIN";		break;
+	case OPERATOR::ACOS:			out << "ACOS";		break;
+	case OPERATOR::ATAN:			out << "ATAN";		break;
+	case OPERATOR::SEC:				out << "SEC";		break;
+	case OPERATOR::CSC:				out << "CSC";		break;
+	case OPERATOR::COT:				out << "COT";		break;
+	case OPERATOR::OPERATOR_COUNT:	out << "ERROR";		break;
+	}
+	return out;
+}
 
 class MathExpression
 {
 private:
-	enum class ChildType
-	{
-		TREE,
-		VAR,
-		NUM
-	};
-	struct ExpressionTree;
-	typedef std::pair<std::variant<ExpressionTree, std::string, float>, ChildType> ExpressionTreeChild;
 	struct ExpressionTree
 	{
-		Operator m_op;
-		std::vector<ExpressionTreeChild> children;
+		struct Child;
+
+		OPERATOR m_op;
+		std::vector<Child> children;
 
 		ExpressionTree();
-		ExpressionTree(Operator op);
-		ExpressionTree(Operator op, ExpressionTreeChild left, ExpressionTreeChild right);
-		//~ExpressionTree();
-		//ExpressionTree(ExpressionTree& other) = delete;
-		//ExpressionTree& operator=(ExpressionTree& other) = delete;
-		//ExpressionTree& operator=(ExpressionTree&& other) = delete;
+		ExpressionTree(OPERATOR op);
+		ExpressionTree(OPERATOR op, Child left, Child right);
 
-		float eval(std::unordered_map<std::string, float> vars);
+		float eval(const std::unordered_map<std::string, float>& vars);
 
 		std::string str();
+	};
+	struct ExpressionTree::Child
+	{
+		enum class Type : uint8_t
+		{
+			TREE,
+			VAR,
+			NUM
+		};
+
+		std::variant<ExpressionTree, std::string, float> value;
+		Type type;
+
+		inline Child(ExpressionTree value)
+			: value(value), type(Type::TREE) {}
+		inline Child(std::string value)
+			: value(value), type(Type::VAR) {}
+		inline Child(float value)
+			: value(value), type(Type::NUM) {}
+
+		inline float eval(const std::unordered_map<std::string, float>& vars)
+		{
+			switch (type)
+			{
+			case Type::TREE:
+				return std::get<ExpressionTree>(value).eval(vars);
+			case Child::Type::VAR:
+				return vars.at(std::get<std::string>(value));
+			case Type::NUM:
+				return std::get<float>(value);
+			}
+		}
 	};
 	
 	ExpressionTree m_exprTree;
@@ -64,14 +119,6 @@ public:
 
 	operator std::string();
 
-	float eval(std::unordered_map<std::string, float> vars);
-
-//	2*(x+5)
-//
-//		mul
-//		/ \
-//	   2   +
-//		  / \
-//		  x 5
+	float eval(const std::unordered_map<std::string, float>& vars);
 };
 
