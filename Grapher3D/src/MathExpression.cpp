@@ -35,7 +35,19 @@ OPERATOR_FUNCTION_DEFINITION(ADD)
 }
 OPERATOR_FUNCTION_DEFINITION(SUB)
 {
-	throw std::logic_error("Operator not implemented");
+	if (vals.size() > 1)
+	{
+		float sum = 0.0f;
+		for (float& val : vals)
+		{
+			sum -= val;
+		}
+		return sum;
+	}
+	else
+	{
+		throw std::runtime_error(std::string("ADD had incorrect number of inputs (expected >1 but got ") + std::to_string(vals.size()) + ")");
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(MUL)
 {
