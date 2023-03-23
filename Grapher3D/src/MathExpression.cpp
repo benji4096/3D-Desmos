@@ -38,15 +38,21 @@ OPERATOR_FUNCTION_DEFINITION(SUB)
 	if (vals.size() > 1)
 	{
 		float sum = 0.0f;
+		int count =0;
 		for (float& val : vals)
 		{
+			if(count==0)
+			{
+				sum = 2*val;
+			}
 			sum -= val;
+			count+=1
 		}
 		return sum;
 	}
 	else
 	{
-		throw std::runtime_error(std::string("ADD had incorrect number of inputs (expected >1 but got ") + std::to_string(vals.size()) + ")");
+		throw std::runtime_error(std::string("SUB had incorrect number of inputs (expected >1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(MUL)
