@@ -1,5 +1,5 @@
 #include "MathExpression.hpp"
-
+#include <cmath>
 #include <sstream>
 
 typedef float (*OperatorFunc)(std::vector<float, std::allocator<float>>);
@@ -71,7 +71,17 @@ OPERATOR_FUNCTION_DEFINITION(DIV)
 }
 OPERATOR_FUNCTION_DEFINITION(EXP)
 {
-	throw std::logic_error("Operator (EXP) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("SQRT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return exp(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(MOD)
 {
@@ -79,7 +89,17 @@ OPERATOR_FUNCTION_DEFINITION(MOD)
 }
 OPERATOR_FUNCTION_DEFINITION(ABS)
 {
-	throw std::logic_error("Operator (ABS) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("ABS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return abs(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(SQRT)
 {
@@ -99,44 +119,127 @@ OPERATOR_FUNCTION_DEFINITION(SIN)
 {
 	if (vals.size() > 1)
 	{
-		throw std::runtime_error(std::string(" had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		throw std::runtime_error(std::string("SIN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 	else
 	{
-		throw std::runtime_error(std::string("MUL had incorrect number of inputs (expected >1 but got ") + std::to_string(vals.size()) + ")");
+		for (float& val : vals)
+		{
+			return sin(val);
+		}
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(COS)
 {
-	throw std::logic_error("Operator (COS) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("COS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return cos(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(TAN)
 {
-	throw std::logic_error("Operator (TAN) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("TAN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return tan(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(ASIN)
 {
-	throw std::logic_error("Operator (ASIN) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("ASIN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return asin(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(ACOS)
 {
-	throw std::logic_error("Operator (ACOS) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("ACOS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return acos(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(ATAN)
 {
-	throw std::logic_error("Operator (ATAN) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("ATAN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return atan(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(SEC)
 {
-	throw std::logic_error("Operator (SEC) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("SEC had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return (1/cos(val));
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(CSC)
 {
-	throw std::logic_error("Operator (CSC) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("CSC had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return (1/sin(val));
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(COT)
 {
-	throw std::logic_error("Operator (COT) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("COT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return (1/tan(val));
+		}
+	}
 }
 
 OperatorFunc OperatorImplementations[int(OPERATOR::OPERATOR_COUNT)] = {
