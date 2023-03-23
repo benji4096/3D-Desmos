@@ -46,7 +46,7 @@ OPERATOR_FUNCTION_DEFINITION(SUB)
 				sum = 2*val;
 			}
 			sum -= val;
-			count+=1
+			count+=1;
 		}
 		return sum;
 	}
@@ -73,7 +73,28 @@ OPERATOR_FUNCTION_DEFINITION(MUL)
 }
 OPERATOR_FUNCTION_DEFINITION(DIV)
 {
-	throw std::logic_error("Operator (DIV) not implemented");
+	if(vals.size()==2)
+	{
+		int count =0;
+		for (float& val : vals)
+		{
+			if(count==0)
+			{
+				sum = 2*val;
+			}
+			if(count==1)
+			{
+				sum /=val;
+				return sum;
+			}
+			sum -= val;
+			count+=1;
+		}	
+	}
+	else
+	{
+		throw std::runtime_error(std::string("DIV had incorrect number of inputs (expected 2 but got ") + std::to_string(vals.size()) + ")");
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(EXP)
 {
@@ -91,7 +112,28 @@ OPERATOR_FUNCTION_DEFINITION(EXP)
 }
 OPERATOR_FUNCTION_DEFINITION(MOD)
 {
-	throw std::logic_error("Operator (MOD) not implemented");
+	if(vals.size()==2)
+	{
+		int count =0;
+		for (float& val : vals)
+		{
+			if(count==0)
+			{
+				sum = 2*val;
+			}
+			if(count==1)
+			{
+				sum % val;
+				return sum;
+			}
+			sum -= val;
+			count+=1;
+		}	
+	}
+	else
+	{
+		throw std::runtime_error(std::string("MOD had incorrect number of inputs (expected 2 but got ") + std::to_string(vals.size()) + ")");
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(ABS)
 {
