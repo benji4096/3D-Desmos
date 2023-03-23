@@ -83,11 +83,28 @@ OPERATOR_FUNCTION_DEFINITION(ABS)
 }
 OPERATOR_FUNCTION_DEFINITION(SQRT)
 {
-	throw std::logic_error("Operator (SQRT) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string("SQRT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		for (float& val : vals)
+		{
+			return sqrt(val);
+		}
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(SIN)
 {
-	throw std::logic_error("Operator (SIN) not implemented");
+	if (vals.size() > 1)
+	{
+		throw std::runtime_error(std::string(" had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+	else
+	{
+		throw std::runtime_error(std::string("MUL had incorrect number of inputs (expected >1 but got ") + std::to_string(vals.size()) + ")");
+	}
 }
 OPERATOR_FUNCTION_DEFINITION(COS)
 {
