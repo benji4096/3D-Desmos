@@ -76,6 +76,7 @@ OPERATOR_FUNCTION_DEFINITION(DIV)
 	if(vals.size()==2)
 	{
 		int count =0;
+		float sum = 0.0f;
 		for (float& val : vals)
 		{
 			if(count==0)
@@ -115,6 +116,7 @@ OPERATOR_FUNCTION_DEFINITION(MOD)
 	if(vals.size()==2)
 	{
 		int count =0;
+		float sum = 0.0f;
 		for (float& val : vals)
 		{
 			if(count==0)
