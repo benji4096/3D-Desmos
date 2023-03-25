@@ -59,7 +59,39 @@ class Grapher3D
 			3, 6, 7
 	};
 
+	std::vector<StandardVertex> vertices2 = { // vertices of a cube
+			   { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+			   { { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+			   { { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+			   { { 1.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } },
+
+			   { { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.0f } },
+			   { { 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 0.0f } },
+			   { { 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f } },
+			   { { 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f } }
+	};
+
+	std::vector<uint32_t> indices2 = { // triangles that form cube
+			0, 3, 1,
+			0, 2, 3,
+			4, 5, 7,
+			4, 7, 6,
+
+			2, 0, 4,
+			2, 4, 6,
+
+			0, 1, 5,
+			0, 5, 4,
+
+			1, 3, 7,
+			1, 7, 5,
+
+			3, 2, 6,
+			3, 6, 7
+	};
+
 	IMeshUniversal<Vertex, uint8_t> m_mesh;
+	IMeshStandard m_mesh2;
 
 
 	TextSDF testText;

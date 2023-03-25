@@ -14,6 +14,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 			{ 1, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, uv) }	// info on how OpenGL should read vertex UV data
 		},
 		GL_UNSIGNED_BYTE), // index type
+		m_mesh2(&vertices2, &indices2),
 		testText()
 {
   windowResize();
@@ -26,7 +27,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	cubeShader.link(); // link cube shader
 
 	m_mesh.upload(); // upload cube mesh to GPU
-
+	m_mesh2.upload();
 
 	testText.setText(" Hello World!");
 	testText.setSize(50);
@@ -69,7 +70,7 @@ void Grapher3D::run()
 		rotate = glm::rotate(rotate, 0.025f, glm::vec3(1.0f, 1.0f, 0.0f)); // rotation animation
 		transform = projection * translate * rotate * center; // combine individual transformations
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
-		m_mesh.draw(); // draw cube
+		m_mesh2.draw(); // draw cube
 
 		//testText.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 		//testText.setText(std::to_string(transform[0][0]) + "\n" + "Hello World!");

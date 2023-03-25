@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "GL/glew.h"
+#include "glm/glm.hpp"
 
 
 struct IMeshUniversalAttribute
@@ -131,4 +132,16 @@ public:
 			dataIsUploaded = false;
 		}
 	}
+};
+
+struct StandardVertex
+{
+	glm::vec3 p;
+	glm::vec3 n;
+};
+
+class IMeshStandard : public IMeshUniversal<StandardVertex, uint32_t>
+{
+public:
+	IMeshStandard(std::vector<StandardVertex> const* verts, std::vector<uint32_t> const* indices);
 };
