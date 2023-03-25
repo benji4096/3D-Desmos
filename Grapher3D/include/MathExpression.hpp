@@ -15,6 +15,7 @@ enum class OPERATOR
 	MUL,
 	DIV,
 	EXP,
+	POW,
 	MOD,
 	ABS,
 	SQRT,
@@ -24,6 +25,7 @@ enum class OPERATOR
 	ASIN,
 	ACOS,
 	ATAN,
+	ATAN2,
 	SEC,
 	CSC,
 	COT,
@@ -42,6 +44,7 @@ inline std::ostream& operator<<(std::ostream& out, const OPERATOR& in)
 	case OPERATOR::MUL:				out << "MUL";		break;
 	case OPERATOR::DIV:				out << "DIV";		break;
 	case OPERATOR::EXP:				out << "EXP";		break;
+	case OPERATOR::POW:				out << "POW";		break;
 	case OPERATOR::MOD:				out << "MOD";		break;
 	case OPERATOR::ABS:				out << "ABS";		break;
 	case OPERATOR::SQRT:			out << "SQRT";		break;
@@ -51,6 +54,7 @@ inline std::ostream& operator<<(std::ostream& out, const OPERATOR& in)
 	case OPERATOR::ASIN:			out << "ASIN";		break;
 	case OPERATOR::ACOS:			out << "ACOS";		break;
 	case OPERATOR::ATAN:			out << "ATAN";		break;
+	case OPERATOR::ATAN2:			out << "ATAN2";		break;
 	case OPERATOR::SEC:				out << "SEC";		break;
 	case OPERATOR::CSC:				out << "CSC";		break;
 	case OPERATOR::COT:				out << "COT";		break;

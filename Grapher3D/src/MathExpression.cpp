@@ -75,22 +75,7 @@ OPERATOR_FUNCTION_DEFINITION(DIV)
 {
 	if(vals.size()==2)
 	{
-		int count =0;
-		float sum = 0.0f;
-		for (float& val : vals)
-		{
-			if(count==0)
-			{
-				sum = 2*val;
-			}
-			if(count==1)
-			{
-				sum /=val;
-				return sum;
-			}
-			sum -= val;
-			count+=1;
-		}	
+		return vals[0] / vals[1];
 	}
 	else
 	{
@@ -99,38 +84,47 @@ OPERATOR_FUNCTION_DEFINITION(DIV)
 }
 OPERATOR_FUNCTION_DEFINITION(EXP)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("SQRT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return exp(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return exp(val);
-		}
+		throw std::runtime_error(std::string("EXP had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+}
+OPERATOR_FUNCTION_DEFINITION(POW)
+{
+	if (vals.size() == 2)
+	{
+		return pow(vals[0], vals[1]);
+	}
+	else
+	{
+		throw std::runtime_error(std::string("POW had incorrect number of inputs (expected 2 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(MOD)
 {
 	if(vals.size()==2)
 	{
-		int count =0;
-		float sum = 0.0f;
-		for (float& val : vals)
-		{
-			if(count==0)
-			{
-				sum = 2*val;
-			}
-			if(count==1)
-			{
-				sum % val;
-				return sum;
-			}
-			sum -= val;
-			count+=1;
-		}	
+		return fmod(vals[0], vals[1]);
+		//int count =0;
+		//float sum = 0.0f;
+		//for (float& val : vals)
+		//{
+		//	if(count==0)
+		//	{
+		//		sum = 2*val;
+		//	}
+		//	if(count==1)
+		//	{
+		//		sum % val;
+		//		return sum;
+		//	}
+		//	sum -= val;
+		//	count+=1;
+		//}	
 	}
 	else
 	{
@@ -139,156 +133,134 @@ OPERATOR_FUNCTION_DEFINITION(MOD)
 }
 OPERATOR_FUNCTION_DEFINITION(ABS)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("ABS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return abs(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return abs(val);
-		}
+		throw std::runtime_error(std::string("ABS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(SQRT)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("SQRT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return sqrt(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return sqrt(val);
-		}
+		throw std::runtime_error(std::string("SQRT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(SIN)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("SIN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return sin(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return sin(val);
-		}
+		throw std::runtime_error(std::string("SIN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(COS)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("COS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return cos(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return cos(val);
-		}
+		throw std::runtime_error(std::string("COS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(TAN)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("TAN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return tan(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return tan(val);
-		}
+		throw std::runtime_error(std::string("TAN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(ASIN)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("ASIN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return asin(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return asin(val);
-		}
+		throw std::runtime_error(std::string("ASIN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(ACOS)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("ACOS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return acos(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return acos(val);
-		}
+		throw std::runtime_error(std::string("ACOS had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(ATAN)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("ATAN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return atan(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return atan(val);
-		}
+		throw std::runtime_error(std::string("ATAN had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+	}
+}
+OPERATOR_FUNCTION_DEFINITION(ATAN2)
+{
+	if (vals.size() == 2)
+	{
+		return atan2(vals[0], vals[1]);
+	}
+	else
+	{
+		throw std::runtime_error(std::string("ATAN2 had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(SEC)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("SEC had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return 1.0f / cos(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return (1/cos(val));
-		}
+		throw std::runtime_error(std::string("SEC had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(CSC)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("CSC had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return 1.0f / sin(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return (1/sin(val));
-		}
+		throw std::runtime_error(std::string("CSC had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 OPERATOR_FUNCTION_DEFINITION(COT)
 {
-	if (vals.size() > 1)
+	if (vals.size() == 1)
 	{
-		throw std::runtime_error(std::string("COT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
+		return 1 / tan(vals[0]);
 	}
 	else
 	{
-		for (float& val : vals)
-		{
-			return (1/tan(val));
-		}
+		throw std::runtime_error(std::string("COT had incorrect number of inputs (expected 1 but got ") + std::to_string(vals.size()) + ")");
 	}
 }
 
@@ -299,6 +271,7 @@ OperatorFunc OperatorImplementations[int(OPERATOR::OPERATOR_COUNT)] = {
 	&op_MUL,
 	&op_DIV,
 	&op_EXP,
+	&op_POW,
 	&op_MOD,
 	&op_ABS,
 	&op_SQRT,
@@ -308,6 +281,7 @@ OperatorFunc OperatorImplementations[int(OPERATOR::OPERATOR_COUNT)] = {
 	&op_ASIN,
 	&op_ACOS,
 	&op_ATAN,
+	&op_ATAN2,
 	&op_SEC,
 	&op_CSC,
 	&op_COT
