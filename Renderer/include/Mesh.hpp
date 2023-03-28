@@ -145,3 +145,38 @@ class IMeshStandard : public IMeshUniversal<StandardVertex, uint32_t>
 public:
 	IMeshStandard(std::vector<StandardVertex> const* verts, std::vector<uint32_t> const* indices);
 };
+
+class MeshBuilder
+{
+	std::vector<StandardVertex> m_verts;
+	std::vector<uint32_t> m_indices;
+	IMeshStandard m_mesh;
+
+public:
+	MeshBuilder();
+
+	inline uint32_t addVertex(glm::vec3 p)
+	{
+		m_verts.push_back({ p, glm::vec3(0.0f, 0.0f, 0.0f) }); // TODO: add normal generation
+		return m_verts.size() - 1;
+	}
+	inline void addTri(uint32_t v1, uint32_t v2, uint32_t v3)
+	{
+		m_indices.push_back(v1);
+		m_indices.push_back(v2);
+		m_indices.push_back(v3);
+	}
+	inline void addTri(glm::vec<3, uint32_t> verts)
+	{
+		addTri(verts[0], verts[1], verts[2]);
+	}
+	void genNormals();
+	inline void upload()
+	{
+		m_mesh.upload();
+	}
+	inline void draw()
+	{
+		m_mesh.draw();
+	}
+};

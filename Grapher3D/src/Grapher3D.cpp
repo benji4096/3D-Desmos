@@ -8,13 +8,7 @@
 
 Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	: m_glfwContext(), m_window(windowWidth, windowHeight, "3D Desmos"), m_glewContext(),
-	m_mesh(&vertices, &indices,
-		{
-			{ 0, 3, GL_FLOAT, GL_FALSE, offsetof(Vertex, xy) },	// info on how OpenGL should read vertex position data
-			{ 1, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, uv) }	// info on how OpenGL should read vertex UV data
-		},
-		GL_UNSIGNED_BYTE), // index type
-		m_mesh2(&vertices2, &indices2),
+		m_mesh2(&vertices2, &indices2), m_mesh(),
 		testText()
 {
   windowResize();
@@ -26,8 +20,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	cubeShader.compile(); // compile cube shader
 	cubeShader.link(); // link cube shader
 
-	m_mesh.upload(); // upload cube mesh to GPU
-	m_mesh2.upload();
+	m_mesh2.upload(); // upload cube mesh to GPU
 
 	testText.setText(" Hello World!");
 	testText.setSize(50);
@@ -37,6 +30,27 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	vars.insert({ "x", 5});
 	MathExpression expr = MathExpression();
 	testText.setText(std::to_string(expr.eval(vars)));
+
+
+	const int numSegments = 1000000;
+	for (int i = 0; i < numSegments + 1; i++)
+	{
+		float v = float(i) / float(numSegments);
+		v = 3 * (v - 0.5f);
+		//   0-2-4-6-8
+		//   |\|\|\|\|
+		//   1-3-5-7-9
+
+		m_mesh.addVertex( { v, v * v, 0.0f } );
+		m_mesh.addVertex( { v, v * v, 1.0f } );
+	}
+	for (int i = 0; i < numSegments; i++)
+	{
+		int index = i * 2;
+		m_mesh.addTri( { index, index + 1, index + 3 } );
+		m_mesh.addTri( { index, index + 3, index + 2 } );
+	}
+	m_mesh.upload();
 }
 
 void Grapher3D::windowResize()
@@ -63,14 +77,15 @@ void Grapher3D::run()
 
 
 
-		glEnable(GL_CULL_FACE); // enable culling
+		//glEnable(GL_CULL_FACE); // enable culling
 
 		cubeShader.use(); // enable shader for cube
 		projection = glm::perspective(45.0f, float(m_windowDims.x) / float(m_windowDims.y), 0.1f, 100.0f); // perspective update aspect ratio
 		rotate = glm::rotate(rotate, 0.025f, glm::vec3(1.0f, 1.0f, 0.0f)); // rotation animation
 		transform = projection * translate * rotate * center; // combine individual transformations
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
-		m_mesh2.draw(); // draw cube
+		//m_mesh2.draw(); // draw cube
+		m_mesh.draw(); // draw parabola
 
 		//testText.setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 		//testText.setText(std::to_string(transform[0][0]) + "\n" + "Hello World!");

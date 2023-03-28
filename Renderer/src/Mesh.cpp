@@ -13,3 +13,14 @@ IMeshStandard::IMeshStandard(std::vector<StandardVertex> const* verts, std::vect
 		GL_UNSIGNED_INT)
 {
 }
+
+MeshBuilder::MeshBuilder()
+	: m_verts(), m_indices(), m_mesh(&m_verts, &m_indices)
+{
+}
+
+void MeshBuilder::genNormals()
+{
+	throw std::runtime_error("genNormals not yet implamented"); // TODO: add mesh normal generation
+}
+
