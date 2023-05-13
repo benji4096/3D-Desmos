@@ -297,7 +297,7 @@ MathExpression::ExpressionTree::ExpressionTree(OPERATOR op)
 {
 }
 
-MathExpression::ExpressionTree::ExpressionTree(OPERATOR op, Child left, Child right)
+MathExpression::ExpressionTree::ExpressionTree(OPERATOR op, ExpressionTreeChild left, ExpressionTreeChild right)
 	: m_op(op), children()
 {
 	children.push_back(left);
@@ -308,7 +308,7 @@ float MathExpression::ExpressionTree::eval(const std::unordered_map<std::string,
 {
 	std::vector<float> childrenValues = std::vector<float>();
 	childrenValues.reserve(children.size());
-	for (Child& child : children)
+	for (ExpressionTreeChild& child : children)
 	{
 		childrenValues.push_back(child.eval(vars));
 	}
@@ -316,7 +316,7 @@ float MathExpression::ExpressionTree::eval(const std::unordered_map<std::string,
 	//if (m_op == OPERATOR::ADD)
 	//{
 	//	float sum = 0.0f;
-	//	for (Child& child : children)
+	//	for (ExpressionTreeChild& child : children)
 	//	{
 	//		sum += child.eval(vars);
 	//	}
@@ -325,7 +325,7 @@ float MathExpression::ExpressionTree::eval(const std::unordered_map<std::string,
 	//else if (m_op == OPERATOR::MUL)
 	//{
 	//	float prod = 1.0f;
-	//	for (Child& child : children)
+	//	for (ExpressionTreeChild& child : children)
 	//	{
 	//		prod *= child.eval(vars);
 	//	}
@@ -343,19 +343,19 @@ std::string MathExpression::ExpressionTree::str()
 
 	rtn << int(m_op);
 	rtn << '(';
-	for (const Child& child : children)
+	for (const ExpressionTreeChild& child : children)
 	{
 		static ExpressionTree x;
 		switch (child.type)
 		{
-		case Child::Type::TREE:
+		case ExpressionTreeChild::Type::TREE:
 			x = std::get<ExpressionTree>(child.value);
 			rtn << x.str();
 			break;
-		case Child::Type::VAR:
+		case ExpressionTreeChild::Type::VAR:
 			rtn << std::get<std::string>(child.value);
 			break;
-		case Child::Type::NUM:
+		case ExpressionTreeChild::Type::NUM:
 			rtn << std::get<float>(child.value);
 			break;
 		}
