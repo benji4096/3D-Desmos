@@ -41,8 +41,11 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 		//   |\|\|\|\|
 		//   1-3-5-7-9
 
-		m_mesh.addVertex( { v, v * v, 0.0f } );
-		m_mesh.addVertex( { v, v * v, 1.0f } );
+		glm::vec3 n = {-2.0 * v, 1, 0};
+
+		n = glm::normalize(n);
+		m_mesh.addVertex( { v * v, v, 0.0f }, n);
+		m_mesh.addVertex( { v * v, v, 1.0f }, n);
 	}
 	for (int i = 0; i < numSegments; i++)
 	{
@@ -65,9 +68,12 @@ void Grapher3D::run()
 	glm::mat4 center = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f)); // translate cube to center
 	glm::mat4 rotate = glm::mat4(1.0f); // rotation of cube
 	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -2.0f)); // translate cube to center
+	glm::mat4 model; // combined model transform
+	glm::mat3 normalTransform; // transformations for object normal
 	glm::mat4 transform; // combined transformation matrix
 
 	GLuint tLoc = cubeShader.getUniformLocation("transform"); // uniform handle for transformation uniform
+	GLuint ntLoc = cubeShader.getUniformLocation("normal_transform"); // uniform handle for transformation uniform
 
 	while (!m_window.shouldClose())
 	{
@@ -82,8 +88,11 @@ void Grapher3D::run()
 		cubeShader.use(); // enable shader for cube
 		projection = glm::perspective(45.0f, float(m_windowDims.x) / float(m_windowDims.y), 0.1f, 100.0f); // perspective update aspect ratio
 		rotate = glm::rotate(rotate, 0.025f, glm::vec3(1.0f, 1.0f, 0.0f)); // rotation animation
-		transform = projection * translate * rotate * center; // combine individual transformations
+		model = translate * rotate * center;
+		normalTransform = glm::mat3(glm::transpose(glm::inverse(model)));
+		transform = projection * model; // combine individual transformations
 		cubeShader.uniform(tLoc, transform); // send transformation matrix to GPU
+		cubeShader.uniform(ntLoc, normalTransform); // send normal transformation matrix to GPU
 		//m_mesh2.draw(); // draw cube
 		m_mesh.draw(); // draw parabola
 

@@ -160,6 +160,11 @@ public:
 		m_verts.push_back({ p, glm::vec3(0.0f, 0.0f, 0.0f) }); // TODO: add normal generation
 		return m_verts.size() - 1;
 	}
+	inline uint32_t addVertex(glm::vec3 p, glm::vec3 n)
+	{
+		m_verts.push_back({ p, n }); // TODO: add normal generation
+		return m_verts.size() - 1;
+	}
 	inline void addTri(uint32_t v1, uint32_t v2, uint32_t v3)
 	{
 		m_indices.push_back(v1);
