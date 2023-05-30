@@ -11,8 +11,8 @@ uniform vec4 textColor;
 
 uniform float aaDist;
 
-const float distMin = 0.5 - aaDist;
-const float distMax = 0.5 + aaDist;
+float distMin = 0.5 - aaDist;
+float distMax = 0.5 + aaDist;
 
 //#define positionDebug
 
