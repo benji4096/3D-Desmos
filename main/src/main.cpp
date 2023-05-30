@@ -14,6 +14,11 @@ int main(int argc, char* argv[])
 		graphApplication.value().run(); // run main loop
 		graphApplication.reset(); // cleanup
 	}
+	catch (const std::runtime_error e)
+	{
+		std::cerr << "Runtime Error: " << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
 	catch (const std::exception e)
 	{
 		std::cerr << "Error: " << e.what() << std::endl;
