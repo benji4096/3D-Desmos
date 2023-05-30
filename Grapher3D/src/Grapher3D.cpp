@@ -32,7 +32,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	testText.setText(std::to_string(expr.eval(vars)));
 
 
-	const int numSegments = 1000000;
+	const int numSegments = 1000;
 	for (int i = 0; i < numSegments + 1; i++)
 	{
 		float v = float(i) / float(numSegments);
