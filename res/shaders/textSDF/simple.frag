@@ -14,7 +14,7 @@ uniform float aaDist;
 float distMin = 0.5 - aaDist;
 float distMax = 0.5 + aaDist;
 
-//#define positionDebug
+#define positionDebug
 
 //#define debugAA
 
@@ -39,7 +39,7 @@ void main()
 #endif
 #else
 
-	FragColor = vec4(vec3(0.0f, 1.0f, 0.0f), 1.0f);
+	FragColor = vec4(vec3(uv, 0.0f), 0.5f);
 
 #endif
 }
