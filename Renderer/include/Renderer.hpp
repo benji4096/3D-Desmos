@@ -37,6 +37,8 @@ public:
 	void swapBuffers(); // swap window buffers
 
   glm::ivec2 getWindowDims();
+  	glm::vec2 getMousePos();
+	
 };
 
 

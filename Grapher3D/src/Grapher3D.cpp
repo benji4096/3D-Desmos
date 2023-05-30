@@ -22,7 +22,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 
 	m_mesh2.upload(); // upload cube mesh to GPU
 
-	testText.setText(" Hello World!");
+	testText.setText("Hello More World!");
 	testText.setSize(50);
 
 
@@ -44,8 +44,8 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 		glm::vec3 n = {-2.0 * v, 1, 0};
 
 		n = glm::normalize(n);
-		m_mesh.addVertex( { v * v, v, 0.0f }, n);
-		m_mesh.addVertex( { v * v, v, 1.0f }, n);
+		m_mesh.addVertex( { v * v, v, 0.0f }, n);//
+		m_mesh.addVertex( { v * v, v, 1.0f }, n);//
 	}
 	for (int i = 0; i < numSegments; i++)
 	{
@@ -77,11 +77,18 @@ void Grapher3D::run()
 
 	while (!m_window.shouldClose())
 	{
+
 		windowResize();
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear screen
 
 
+			
+
+		glm::vec2 mousePos = m_window.getMousePos();
+		//testText.setText()
+		testText.setText(std::string("(") + std::to_string(mousePos.x) + ", " + std::to_string(mousePos.y) + ")");
+		translate = glm::translate(glm::mat4(1.0f), glm::vec3(glm::vec2(1.0f,-1.0f)*mousePos/200.0f -glm::vec2(1.25f,-1.5f), -3.0f));
 
 		//glEnable(GL_CULL_FACE); // enable culling
 

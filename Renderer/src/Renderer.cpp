@@ -90,3 +90,9 @@ glm::ivec2 Window::getWindowDims()
   glfwGetWindowSize(m_window, &rtn.x, &rtn.y);
   return rtn;
 }
+glm::vec2 Window::getMousePos()
+{
+  double x, y;
+  glfwGetCursorPos(m_window, &x, &y);
+  return { (float)x, (float)y };
+}
