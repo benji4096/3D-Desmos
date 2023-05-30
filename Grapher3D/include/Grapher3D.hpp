@@ -56,6 +56,7 @@ class Grapher3D
 	IMeshStandard m_mesh2;
 	MeshBuilder m_mesh;
 
+	FontSDF font_openSans = FontSDF("res/fonts/open-sans.regular.ttf", 32);
 	TextSDF testText;
 
 public:

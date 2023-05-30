@@ -9,7 +9,7 @@
 Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	: m_glfwContext(), m_window(windowWidth, windowHeight, "3D Desmos"), m_glewContext(),
 		m_mesh2(&vertices2, &indices2), m_mesh(),
-		testText()
+		testText(&font_openSans)
 {
   windowResize();
 
@@ -29,7 +29,7 @@ Grapher3D::Grapher3D(int windowWidth, int windowHeight)
 	std::unordered_map<std::string, float> vars = std::unordered_map<std::string, float>();
 	vars.insert({ "x", 5});
 	MathExpression expr = MathExpression();
-	testText.setText(std::to_string(expr.eval(vars)));
+	//testText.setText(std::to_string(expr.eval(vars)));
 
 
 	const int numSegments = 1000;
